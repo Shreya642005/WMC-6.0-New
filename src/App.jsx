@@ -1,22 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from "./components/Navbar";
-import Home from './pages/HomePage';
-import AllMissionsPage from './pages/AllMissionsPage';
-import MissionFormPage from "./pages/MissionFormPage";
-import MissionMap from './pages/MapViewPage';
+import Navbar from '@/components/Navbar';
+import HomePage from '@/pages/HomePage';
+import AllMissionsPage from '@/pages/AllMissionsPage';
+import MissionFormPage from '@/pages/MissionFormPage';
+import MapViewPage from '@/pages/MapViewPage';
 
 function App() {
   return (
     <Router>
       <div className="bg-[#151414] text-white min-h-screen">
         <Navbar />
-        
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/missions" element={<AllMissionsPage />} />
-          <Route path="/new-mission" element={<MissionFormPage />} />
-          <Route path="/map-view" element={<MissionMap />} />
-        </Routes>
+        <main className="pt-16"> {/* Add padding to account for fixed navbar */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/missions" element={<AllMissionsPage />} />
+            <Route path="/new-mission" element={<MissionFormPage />} />
+            <Route path="/map-view" element={<MapViewPage />} />
+            {/* Add a fallback route */}
+            <Route path="*" element={<div className="p-4">Page not found</div>} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );

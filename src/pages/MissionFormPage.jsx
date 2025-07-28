@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import "@/styles/missionForm.css";
+import "../styles/missionForm.css"
 
 const MissionFormPage = () => {
   const [formData, setFormData] = useState({
@@ -103,7 +103,7 @@ const MissionFormPage = () => {
   }
 
   return (
-    <div className="mission-form-container">
+    <div className="mission-form-container pt-24"> {/* Added pt-24 to account for fixed navbar */}
       {/* Background Elements */}
       <div className="background-elements">
         <div className="floating-orb orb-1"></div>

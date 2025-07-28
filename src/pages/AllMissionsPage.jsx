@@ -23,7 +23,6 @@ export default function AllMissionsPage() {
   const [newMissionNotification, setNewMissionNotification] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
 
-  // Load missions on component mount
   useEffect(() => {
     try {
       const loadedMissions = getMissions()
@@ -35,7 +34,6 @@ export default function AllMissionsPage() {
     }
   }, [])
 
-  // Filter and sort missions
   const filteredMissions = useMemo(() => {
     if (!missions.length) return []
 
@@ -46,10 +44,8 @@ export default function AllMissionsPage() {
       return true
     })
 
-    // Sort missions
     filtered.sort((a, b) => {
       let comparison = 0
-
       switch (filters.sortBy) {
         case "date":
           comparison = new Date(a.date + " " + a.time).getTime() - new Date(b.date + " " + b.time).getTime()
@@ -64,23 +60,19 @@ export default function AllMissionsPage() {
         default:
           comparison = 0
       }
-
       return filters.sortOrder === "desc" ? -comparison : comparison
     })
 
     return filtered
   }, [missions, filters])
 
-  // Count active missions
   const activeMissionsCount = missions.filter((m) => m.status === "active").length
 
-  // Handle mission selection from map
   const handleMissionSelect = (mission) => {
     setSelectedMissionId(mission.id)
     if (viewMode === "map") {
       setViewMode("cards")
     }
-    // Scroll to mission card
     setTimeout(() => {
       const element = document.getElementById(`mission-${mission.id}`)
       if (element) {
@@ -89,13 +81,11 @@ export default function AllMissionsPage() {
     }, 100)
   }
 
-  // Add demo mission
   const addDemoMission = () => {
     const demoMission = {
       id: Date.now().toString(),
       title: "Rhino Rampage Downtown",
-      description:
-        "The Rhino is causing massive property damage in the financial district. Multiple vehicles overturned.",
+      description: "The Rhino is causing massive property damage in the financial district. Multiple vehicles overturned.",
       date: new Date().toISOString().split("T")[0],
       time: new Date().toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit" }),
       location: "Wall Street",
@@ -127,13 +117,11 @@ export default function AllMissionsPage() {
 
   return (
     <div className="all-missions-page min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-red-900/20">
-      {/* Background pattern */}
       <div className="fixed inset-0 opacity-5">
         <div className="spider-web-bg absolute inset-0"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
@@ -148,7 +136,6 @@ export default function AllMissionsPage() {
             across New York City.
           </p>
 
-          {/* Live mission counter */}
           <div className="mt-6 flex items-center justify-center gap-4 flex-wrap">
             <div className="bg-red-600/20 border border-red-500/30 rounded-lg px-4 py-2 flex items-center gap-2">
               <Zap className="w-5 h-5 text-red-400" />
@@ -161,7 +148,6 @@ export default function AllMissionsPage() {
           </div>
         </div>
 
-        {/* Filters */}
         <MissionFilters
           filters={filters}
           onFiltersChange={setFilters}
@@ -170,7 +156,6 @@ export default function AllMissionsPage() {
           onViewModeChange={setViewMode}
         />
 
-        {/* Content */}
         {viewMode === "cards" ? (
           <div className="missions-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredMissions.map((mission, index) => (
@@ -209,7 +194,6 @@ export default function AllMissionsPage() {
         )}
       </div>
 
-      {/* Mission Notification */}
       <MissionNotification mission={newMissionNotification} onClose={() => setNewMissionNotification(null)} />
     </div>
   )

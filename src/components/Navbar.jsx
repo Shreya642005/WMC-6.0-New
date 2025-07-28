@@ -12,7 +12,7 @@ export default function Navbar() {
               <img
                 src="/images/logo.png"
                 alt="Spider Logo"
-                className="w-10 h-10"
+                className="w-10 h-10" 
               />
             </Link>
 

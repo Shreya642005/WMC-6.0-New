@@ -13,18 +13,16 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const spiderTranslate = Math.min(scrollY * 0.2, 40); // Limit movement
+  const spiderTranslate = Math.min(scrollY * 0.2, 40);
 
   return (
     <section className="relative min-h-screen pt-28 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 bg-[#151414] text-white overflow-hidden">
-      {/* Background Logo */}
+      {/* Background and web elements */}
       <img
         src="/images/BackgroundLogo.png"
         alt="Background Logo"
         className="absolute left-1/2 top-1/2 w-[400px] opacity-60 -translate-x-1/2 -translate-y-1/2 z-10"
       />
-
-      {/* Web overlays */}
       <img
         src="/images/web2.png"
         className="fixed top-0 left-0 w-[300px] opacity-90 z-10"
@@ -36,17 +34,15 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
         alt="web-top-right"
       />
 
-      {/* Left Text Content */}
-      <div className="z-10 text-left max-w-xl mt-10 md:mt-0">
+      {/* Text content */}
+      <div className="z-10 text-left max-w-xl mt-10 md:mt-0 transform translate-y-[-2.5rem] translate-x-4 md:translate-y-[-3.5rem] md:translate-x-6">
         <h1 className="text-[50px] md:text-[80px] leading-tight font-['Anton'] font-normal">
           <span className="block text-white">PETER'S</span>
           <span className="block text-[#a62121]">VICTORY DIARIES</span>
         </h1>
-
         <p className="mt-6 text-lg text-gray-300">
-          A web-slinger's chronicle of battles fought and lives saved. <br />
-          After the world forgot Peter Parker, this digital journal <br />
-          became his only record of the hero he still is.
+          A web-slinger's chronicle of battles fought and lives saved.
+          After the world forgot Peter Parker, this digital journal became his only record of the hero he still is.
         </p>
 
         {/* Buttons */}
@@ -57,41 +53,30 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
               className="absolute -top-4 -left-6 w-16 opacity-70"
               alt="web left"
             />
-            <button 
+            <button
               onClick={scrollToMissions}
               className="bg-[#213A8F] text-white px-6 py-2 font-bold uppercase text-sm shadow-md hover:bg-[#1a2f70] transition"
             >
               NEW MISSION LOG
             </button>
           </div>
-
           <div className="relative">
             <img
               src="/images/twinwebright.png"
               className="absolute -top-4 -right-6 w-16 opacity-70"
               alt="web right"
             />
-            <button 
+            <button
               onClick={scrollToAbout}
               className="border border-red-600 text-white px-6 py-2 font-bold uppercase text-sm hover:bg-red-600 transition"
             >
               VIEW ARCHIVES
             </button>
           </div>
-
-          {/* Optional: Direct link to full missions page */}
-          <div className="relative mt-4 md:mt-0 w-full md:w-auto">
-            <Link 
-              to="/missions" 
-              className="text-red-400 hover:text-red-300 text-sm font-medium flex items-center gap-1 justify-center md:justify-start"
-            >
-              Or explore all missions →
-            </Link>
-          </div>
         </div>
       </div>
 
-      {/* Spiderman + Thread */}
+      {/* Spiderman image */}
       <div
         className="relative z-10 flex flex-col items-center mt-12 md:mt-0 md:absolute md:top-0 md:right-12"
         style={{ transform: `translateY(${spiderTranslate}px)` }}
