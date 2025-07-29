@@ -1,23 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const Hero = ({ scrollToAbout, scrollToMissions }) => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Enhanced scroll animations for Spider-Man using scroll state
-  const spiderTranslateY = Math.min(scrollY * 0.3, 120);
-  const spiderTranslateX = Math.min(scrollY * 0.08, 25);
-  const spiderRotate = Math.min(scrollY * 0.02, 8);
-  const threadHeight = Math.min(128 + scrollY * 0.15, 220);
 
   return (
     <section className="relative min-h-screen pt-28 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 text-white overflow-hidden">
@@ -78,12 +62,9 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
         </motion.div>
       </div>
 
-      {/* Enhanced Spiderman animation */}
+      {/* Enhanced Spiderman animation - scrolls naturally with content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center mt-12 md:mt-0 md:absolute md:top-0 md:right-12"
-        style={{
-          transform: `translateY(${spiderTranslateY}px) translateX(${spiderTranslateX}px) rotate(${spiderRotate}deg)`
-        }}
+        className="relative z-10 flex flex-col items-center mt-12 md:mt-0 md:ml-auto md:mr-12"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -92,7 +73,7 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
           src="/images/thread.jpg"
           alt="Web Thread"
           className="object-contain"
-          style={{ height: `${threadHeight}px` }}
+          style={{ height: `140px` }}
         />
         <motion.img
           src="/images/Spiderman.png"
