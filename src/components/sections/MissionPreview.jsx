@@ -24,8 +24,25 @@ const MissionPreview = () => {
   ];
 
   return (
-    <section className="min-h-screen py-20 bg-gray-950/95 backdrop-blur-md">
-      <div className="container mx-auto px-6">
+    <section className="min-h-screen py-20 bg-[#151414] relative">
+      {/* Spider-Man Background Elements - even lighter for this section */}
+      <img
+        src="/images/BackgroundLogo.png"
+        alt="Background Logo"
+        className="absolute left-1/2 top-1/2 w-[350px] opacity-8 -translate-x-1/2 -translate-y-1/2 z-0"
+      />
+      <img
+        src="/images/web2.png"
+        className="absolute top-0 left-0 w-[200px] opacity-5 z-0"
+        alt="web-top-left"
+      />
+      <img
+        src="/images/web1.png"
+        className="absolute top-0 right-0 w-[150px] opacity-5 z-0 pointer-events-none"
+        alt="web-top-right"
+      />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-4xl font-bold text-white font-['Anton'] tracking-wide">
@@ -43,7 +60,7 @@ const MissionPreview = () => {
             {previewMissions.map(mission => (
               <div 
                 key={mission.id} 
-                className="bg-gray-900/80 border border-gray-800 rounded-xl p-6 hover:border-red-400/30 transition-all"
+                className="bg-black/30 border border-gray-800 rounded-xl p-6 hover:border-red-400/30 transition-all backdrop-blur-sm"
               >
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-white">{mission.title}</h3>

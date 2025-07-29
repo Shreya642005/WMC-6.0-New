@@ -48,19 +48,32 @@ const missions = [
   },
 ];
 
-export default function MapView() {
+export default function MapViewPage() {
   return (
-    <div className="bg-[#0f0f0f] min-h-screen text-white font-sans">
-      <Navbar />
+    <div className="min-h-screen bg-[#151414] text-white relative">
+      {/* Spider-Man Background Elements */}
+      <img
+        src="/images/BackgroundLogo.png"
+        alt="Background Logo"
+        className="fixed left-1/2 top-1/2 w-[400px] opacity-15 -translate-x-1/2 -translate-y-1/2 z-0"
+      />
+      <img
+        src="/images/web2.png"
+        className="fixed top-0 left-0 w-[250px] opacity-15 z-0"
+        alt="web-top-left"
+      />
+      <img
+        src="/images/web1.png"
+        className="fixed top-0 right-0 w-[180px] opacity-10 z-0 pointer-events-none"
+        alt="web-top-right"
+      />
 
-      <header className="text-center pt-10">
-        <h1 className="text-4xl font-bold text-red-500 drop-shadow-[0_0_10px_rgba(255,0,0,0.6)]">
-          Mission Map
-        </h1>
+      <header className="relative z-10 text-center pt-20 pb-8">
+        <h1 className="text-4xl font-bold mb-4 text-red-400">Mission Map</h1>
         <p className="text-gray-300 mt-2">Track all Web-Crawler missions in real-time</p>
       </header>
 
-      <main className="flex justify-center items-center pt-8 pb-20">
+      <main className="relative z-10 flex justify-center items-center pt-8 pb-20">
         <div className="w-full md:w-3/4 h-[500px] rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(255,0,0,0.3)] border border-red-700">
           <MapContainer
             center={[39.5, -98.35]}
