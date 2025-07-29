@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default function Navbar() {
   return (
     <div className="fixed top-0 left-0 w-full z-50 px-4">
-      <div className="p-[1.3px] bg-gradient-to-r from-red-600 via-[#4d0000] to-black rounded-md shadow-md max-w-[1100px] mx-auto mt-4">
-        <header className="bg-gradient-to-r from-red-950 via-black to-black rounded-md opacity-95">
+      <div className="p-[1.3px] bg-gradient-to-r from-red-600/80 via-[#4d0000]/60 to-transparent rounded-md shadow-lg max-w-[1100px] mx-auto mt-8">
+        <header className="bg-gradient-to-r from-red-950/95 via-black/95 to-black/90 rounded-md backdrop-blur-sm">
           <nav className="px-6 py-3 flex items-center justify-between">
             {/* Logo */}
             <Link to="/" aria-label="Brand" className="flex items-center">

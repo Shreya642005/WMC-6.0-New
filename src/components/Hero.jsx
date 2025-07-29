@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Hero = ({ scrollToAbout, scrollToMissions }) => {
   const [scrollY, setScrollY] = useState(0);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,15 +15,21 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const spiderTranslate = Math.min(scrollY * 0.2, 40);
+  // Enhanced scroll animations for Spider-Man
+  const spiderTranslateY = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  const spiderTranslateX = useTransform(scrollYProgress, [0, 0.3], [0, 20]);
+  const spiderRotate = useTransform(scrollYProgress, [0, 0.5], [0, 5]);
+  const threadHeight = useTransform(scrollYProgress, [0, 0.4], [128, 200]);
 
   return (
     <section className="relative min-h-screen pt-28 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 bg-[#151414] text-white overflow-hidden">
       {/* Background and web elements */}
-      <img
+      <motion.img
         src="/images/BackgroundLogo.png"
         alt="Background Logo"
         className="absolute left-1/2 top-1/2 w-[400px] opacity-60 -translate-x-1/2 -translate-y-1/2 z-10"
+        animate={{ rotate: [0, 1, 0, -1, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <img
         src="/images/web2.png"
@@ -36,17 +44,32 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
 
       {/* Text content */}
       <div className="z-10 text-left max-w-xl mt-10 md:mt-0 transform translate-y-[-2.5rem] translate-x-4 md:translate-y-[-3.5rem] md:translate-x-6">
-        <h1 className="text-[50px] md:text-[80px] leading-tight font-['Anton'] font-normal">
+        <motion.h1 
+          className="text-[50px] md:text-[80px] leading-tight font-['Anton'] font-normal"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
           <span className="block text-white">PETER'S</span>
           <span className="block text-[#a62121]">VICTORY DIARIES</span>
-        </h1>
-        <p className="mt-6 text-lg text-gray-300">
+        </motion.h1>
+        <motion.p 
+          className="mt-6 text-lg text-gray-300"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+        >
           A web-slinger's chronicle of battles fought and lives saved.
           After the world forgot Peter Parker, this digital journal became his only record of the hero he still is.
-        </p>
+        </motion.p>
 
         {/* Buttons */}
-        <div className="mt-8 flex flex-wrap gap-4 items-center">
+        <motion.div 
+          className="mt-8 flex flex-wrap gap-4 items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+        >
           <div className="relative">
             <img
               src="/images/twinwebleft.png"
@@ -73,25 +96,45 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
               VIEW ARCHIVES
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Spiderman image */}
-      <div
+      {/* Enhanced Spiderman animation */}
+      <motion.div
         className="relative z-10 flex flex-col items-center mt-12 md:mt-0 md:absolute md:top-0 md:right-12"
-        style={{ transform: `translateY(${spiderTranslate}px)` }}
+        style={{ 
+          y: spiderTranslateY,
+          x: spiderTranslateX,
+          rotate: spiderRotate
+        }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <img
+        <motion.img
           src="/images/thread.jpg"
           alt="Web Thread"
-          className="h-32 md:h-40 object-contain"
+          className="object-contain"
+          style={{ height: threadHeight }}
         />
-        <img
+        <motion.img
           src="/images/Spiderman.png"
           alt="Spiderman"
-          className="w-[260px] md:w-[400px] ml-[-40px] md:ml-[-25px] drop-shadow-[0_0_25px_rgba(255,0,0,0.4)]"
+          className="w-[260px] md:w-[400px] ml-[-40px] md:ml-[-25px]"
+          style={{
+            filter: "drop-shadow(0 0 25px rgba(255,0,0,0.4))"
+          }}
+          animate={{ 
+            y: [0, -5, 0],
+            rotateY: [0, 2, 0, -2, 0]
+          }}
+          transition={{ 
+            duration: 6, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
         />
-      </div>
+      </motion.div>
     </section>
   );
 };
