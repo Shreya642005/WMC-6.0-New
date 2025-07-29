@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling for entire page */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Global background for consistent Spider-Man theme across all pages */
 body {
   background-color: #151414;
@@ -58,6 +63,16 @@ body {
   opacity: 0.2;
 }
 
+/* Gentle wiggle animation for background logo */
+@keyframes gentle-wiggle {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-5deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+}
+
 /* Stable positioning for background logo to prevent layout shifts */
 .background-logo-stable {
   position: fixed !important;
@@ -68,5 +83,6 @@ body {
   opacity: 0.6 !important;
   z-index: 0 !important;
   pointer-events: none !important;
-  will-change: auto !important;
+  will-change: transform !important;
+  animation: gentle-wiggle 8s ease-in-out infinite !important;
 }

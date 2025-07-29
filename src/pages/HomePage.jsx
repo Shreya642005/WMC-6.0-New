@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Hero from "@/components/Hero";
 import About from "@/components/sections/About";
 import MissionPreview from "@/components/sections/MissionPreview";
@@ -7,13 +8,23 @@ export default function HomePage() {
   const aboutRef = useRef(null);
   const missionsRef = useRef(null);
   const footerRef = useRef(null);
+  const containerRef = useRef(null);
 
   const scrollTo = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // Scroll-based animation for Spiderman
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Transform scroll progress to move Spiderman down the page
+  const spidermanY = useTransform(scrollYProgress, [0, 1], ["10vh", "80vh"]);
+
   return (
-    <div className="relative bg-[#151414] min-h-screen">
+    <div ref={containerRef} className="relative bg-[#151414] min-h-screen">
       {/* Fixed Static Background Elements for Entire Home Page */}
       <img
         src="/images/BackgroundLogo.png"
@@ -31,6 +42,30 @@ export default function HomePage() {
         alt="web-top-right"
       />
 
+      {/* Scrolling Spiderman that follows the page */}
+      <motion.div
+        className="fixed right-8 md:right-16 z-5 pointer-events-none"
+        style={{ top: spidermanY }}
+      >
+        <motion.img
+          src="/images/Spiderman.png"
+          alt="Scrolling Spiderman"
+          className="w-[120px] md:w-[180px] opacity-80"
+          style={{
+            filter: "drop-shadow(0 0 15px rgba(255,0,0,0.3))"
+          }}
+          animate={{ 
+            rotateY: [0, 5, 0, -5, 0],
+            y: [0, -3, 0]
+          }}
+          transition={{ 
+            duration: 4, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+        />
+      </motion.div>
+
       {/* All content sections with relative positioning over the fixed background */}
       <div className="relative z-10">
         <Hero
@@ -38,11 +73,11 @@ export default function HomePage() {
           scrollToMissions={() => scrollTo(missionsRef)}
         />
 
-        <section ref={aboutRef} className="scroll-mt-20">
+        <section ref={aboutRef} className="scroll-mt-20 scroll-smooth">
           <About />
         </section>
 
-        <section ref={missionsRef} className="scroll-mt-20">
+        <section ref={missionsRef} className="scroll-mt-20 scroll-smooth">
           <MissionPreview />
         </section>
 
