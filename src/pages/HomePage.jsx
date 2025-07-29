@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Hero from "@/components/Hero";
 import About from "@/components/sections/About";
 import MissionPreview from "@/components/sections/MissionPreview";
-import { motion } from "framer-motion";
 
 export default function HomePage() {
   const aboutRef = useRef(null);
@@ -16,12 +15,10 @@ export default function HomePage() {
   return (
     <div className="relative bg-[#151414] min-h-screen">
       {/* Fixed Static Background Elements for Entire Home Page */}
-      <motion.img
+      <img
         src="/images/BackgroundLogo.png"
         alt="Background Logo"
-        className="fixed left-1/2 top-1/2 w-[400px] opacity-60 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none"
-        animate={{ rotate: [0, 1, 0, -1, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="background-logo-stable"
       />
       <img
         src="/images/web2.png"

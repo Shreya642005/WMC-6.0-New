@@ -57,3 +57,16 @@ body {
   background-repeat: no-repeat;
   opacity: 0.2;
 }
+
+/* Stable positioning for background logo to prevent layout shifts */
+.background-logo-stable {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 400px !important;
+  opacity: 0.6 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  will-change: auto !important;
+}
