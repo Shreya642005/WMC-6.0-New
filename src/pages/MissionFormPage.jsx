@@ -47,8 +47,6 @@ const MissionFormPage = () => {
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
-
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
@@ -61,21 +59,14 @@ const MissionFormPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (!validateForm()) {
-      return
-    }
+    if (!validateForm()) return
 
     setIsSubmitting(true)
 
-    // Simulate API call
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      // Show success modal
       setShowSuccessModal(true)
 
-      // Reset form after 3 seconds
       setTimeout(() => {
         setShowSuccessModal(false)
         setFormData({
@@ -87,7 +78,6 @@ const MissionFormPage = () => {
           fullDescription: "",
           image: null,
         })
-        // Reset file input
         const fileInput = document.getElementById("image-upload")
         if (fileInput) fileInput.value = ""
       }, 3000)
@@ -103,204 +93,204 @@ const MissionFormPage = () => {
   }
 
   return (
-    <div className="mission-form-container pt-24"> {/* Added pt-24 to account for fixed navbar */}
-      {/* Background Elements */}
-      <div className="background-elements">
-        <div className="floating-orb orb-1"></div>
-        <div className="floating-orb orb-2"></div>
-        <div className="floating-orb orb-3"></div>
-        <div className="web-overlay"></div>
-        <div className="logo-background"></div>
-      </div>
+    <div className="mission-form-container bg-[#151414] min-h-screen pt-24 relative">
+      <img
+        src="/images/BackgroundLogo.png"
+        alt="Background Logo"
+        className="fixed left-1/2 top-1/2 w-[500px] opacity-95 -translate-x-1/2 -translate-y-1/2 z-0"
+      />
+      <img
+        src="/images/web2.png"
+        className="fixed top-0 left-0 w-[250px] opacity-15 z-0"
+        alt="web-top-left"
+      />
+      <img
+        src="/images/web1.png"
+        className="fixed top-0 right-0 w-[180px] opacity-10 z-0 pointer-events-none"
+        alt="web-top-right"
+      />
 
-      {/* Header */}
-      <div className="form-header">
+      <div className="form-header relative z-10">
         <div className="header-icon">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
           </svg>
         </div>
-        <h1 className="form-title">NEW MISSION LOG</h1>
-        <p className="form-subtitle">Document your latest mission for the Web-Crawler Database</p>
-        <div className="title-divider"></div>
+        <div className="header-content">
+          <h1 className="main-title">New Mission Entry</h1>
+          <p className="subtitle">Document your web-slinging adventures</p>
+        </div>
       </div>
 
-      {/* Form Card */}
-      <div className="form-card">
-        <div className="card-header">
-          <div className="card-icon">M</div>
-          <h2>Mission Details</h2>
-        </div>
-
-        <form onSubmit={handleSubmit} className="mission-form">
-          {/* Mission Title */}
-          <div className="form-group">
-            <label htmlFor="missionTitle" className="form-label">
-              <span className="label-icon">📝</span>
-              Mission Title *
-            </label>
-            <input
-              type="text"
-              id="missionTitle"
-              value={formData.missionTitle}
-              onChange={(e) => handleInputChange("missionTitle", e.target.value)}
-              placeholder="e.g., Night Patrol"
-              className={`form-input ${errors.missionTitle ? "error" : ""}`}
-            />
-            {errors.missionTitle && (
-              <div className="error-message">
-                <span className="error-icon">⚠️</span>
-                {errors.missionTitle}
-              </div>
-            )}
+      <div className="form-wrapper relative z-10">
+        <div className="form-card">
+          <div className="card-header">
+            <div className="card-icon">M</div>
+            <h2>Mission Details</h2>
           </div>
 
-          {/* Short Description */}
-          <div className="form-group">
-            <label htmlFor="shortDescription" className="form-label">
-              <span className="label-icon">📄</span>
-              Short Description *
-            </label>
-            <input
-              type="text"
-              id="shortDescription"
-              value={formData.shortDescription}
-              onChange={(e) => handleInputChange("shortDescription", e.target.value)}
-              placeholder="Brief mission summary (1-2 lines)"
-              className={`form-input ${errors.shortDescription ? "error" : ""}`}
-            />
-            {errors.shortDescription && (
-              <div className="error-message">
-                <span className="error-icon">⚠️</span>
-                {errors.shortDescription}
-              </div>
-            )}
-          </div>
-
-          {/* Date and Time Row */}
-          <div className="form-row">
+          <form onSubmit={handleSubmit} className="mission-form">
             <div className="form-group">
-              <label htmlFor="date" className="form-label">
-                <span className="label-icon">📅</span>
-                Date *
+              <label htmlFor="missionTitle" className="form-label">
+                <span className="label-icon">📝</span>
+                Mission Title *
               </label>
               <input
-                type="date"
-                id="date"
-                value={formData.date}
-                onChange={(e) => handleInputChange("date", e.target.value)}
-                className={`form-input ${errors.date ? "error" : ""}`}
+                type="text"
+                id="missionTitle"
+                value={formData.missionTitle}
+                onChange={(e) => handleInputChange("missionTitle", e.target.value)}
+                placeholder="e.g., Night Patrol"
+                className={`form-input ${errors.missionTitle ? "error" : ""}`}
               />
-              {errors.date && (
+              {errors.missionTitle && (
                 <div className="error-message">
                   <span className="error-icon">⚠️</span>
-                  {errors.date}
+                  {errors.missionTitle}
                 </div>
               )}
             </div>
 
             <div className="form-group">
-              <label htmlFor="time" className="form-label">
-                <span className="label-icon">🕐</span>
-                Time (Optional)
+              <label htmlFor="shortDescription" className="form-label">
+                <span className="label-icon">📄</span>
+                Short Description *
               </label>
               <input
-                type="time"
-                id="time"
-                value={formData.time}
-                onChange={(e) => handleInputChange("time", e.target.value)}
-                className="form-input"
+                type="text"
+                id="shortDescription"
+                value={formData.shortDescription}
+                onChange={(e) => handleInputChange("shortDescription", e.target.value)}
+                placeholder="Brief mission summary (1-2 lines)"
+                className={`form-input ${errors.shortDescription ? "error" : ""}`}
               />
-            </div>
-          </div>
-
-          {/* Place */}
-          <div className="form-group">
-            <label htmlFor="place" className="form-label">
-              <span className="label-icon">📍</span>
-              Location *
-            </label>
-            <input
-              type="text"
-              id="place"
-              value={formData.place}
-              onChange={(e) => handleInputChange("place", e.target.value)}
-              placeholder="e.g., Queens Rooftop"
-              className={`form-input ${errors.place ? "error" : ""}`}
-            />
-            {errors.place && (
-              <div className="error-message">
-                <span className="error-icon">⚠️</span>
-                {errors.place}
-              </div>
-            )}
-          </div>
-
-          {/* Full Description */}
-          <div className="form-group">
-            <label htmlFor="fullDescription" className="form-label">
-              <span className="label-icon">📋</span>
-              Full Mission Report *
-            </label>
-            <textarea
-              id="fullDescription"
-              value={formData.fullDescription}
-              onChange={(e) => handleInputChange("fullDescription", e.target.value)}
-              placeholder="Detailed mission story and outcomes..."
-              rows="6"
-              className={`form-textarea ${errors.fullDescription ? "error" : ""}`}
-            />
-            {errors.fullDescription && (
-              <div className="error-message">
-                <span className="error-icon">⚠️</span>
-                {errors.fullDescription}
-              </div>
-            )}
-          </div>
-
-          {/* Image Upload */}
-          <div className="form-group">
-            <label htmlFor="image-upload" className="form-label">
-              <span className="label-icon">📷</span>
-              Mission Photo (Optional)
-            </label>
-            <div className="file-upload-container">
-              <input
-                type="file"
-                id="image-upload"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="file-input"
-              />
-              <label htmlFor="image-upload" className="file-upload-label">
-                <div className="upload-icon">📤</div>
-                <span className="upload-text">
-                  {formData.image ? formData.image.name : "Click to upload mission photo"}
-                </span>
-              </label>
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="form-submit">
-            <button type="submit" disabled={isSubmitting} className={`submit-button ${isSubmitting ? "loading" : ""}`}>
-              {isSubmitting ? (
-                <>
-                  <div className="loading-spinner"></div>
-                  Logging Mission...
-                </>
-              ) : (
-                <>
-                  <span className="button-icon">✅</span>
-                  Log Mission
-                </>
+              {errors.shortDescription && (
+                <div className="error-message">
+                  <span className="error-icon">⚠️</span>
+                  {errors.shortDescription}
+                </div>
               )}
-            </button>
-          </div>
-        </form>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="date" className="form-label">
+                  <span className="label-icon">📅</span>
+                  Date *
+                </label>
+                <input
+                  type="date"
+                  id="date"
+                  value={formData.date}
+                  onChange={(e) => handleInputChange("date", e.target.value)}
+                  className={`form-input ${errors.date ? "error" : ""}`}
+                />
+                {errors.date && (
+                  <div className="error-message">
+                    <span className="error-icon">⚠️</span>
+                    {errors.date}
+                  </div>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="time" className="form-label">
+                  <span className="label-icon">🕐</span>
+                  Time (Optional)
+                </label>
+                <input
+                  type="time"
+                  id="time"
+                  value={formData.time}
+                  onChange={(e) => handleInputChange("time", e.target.value)}
+                  className="form-input"
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="place" className="form-label">
+                <span className="label-icon">📍</span>
+                Location *
+              </label>
+              <input
+                type="text"
+                id="place"
+                value={formData.place}
+                onChange={(e) => handleInputChange("place", e.target.value)}
+                placeholder="e.g., Queens Rooftop"
+                className={`form-input ${errors.place ? "error" : ""}`}
+              />
+              {errors.place && (
+                <div className="error-message">
+                  <span className="error-icon">⚠️</span>
+                  {errors.place}
+                </div>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="fullDescription" className="form-label">
+                <span className="label-icon">📋</span>
+                Full Mission Report *
+              </label>
+              <textarea
+                id="fullDescription"
+                value={formData.fullDescription}
+                onChange={(e) => handleInputChange("fullDescription", e.target.value)}
+                placeholder="Detailed mission story and outcomes..."
+                rows="6"
+                className={`form-textarea ${errors.fullDescription ? "error" : ""}`}
+              />
+              {errors.fullDescription && (
+                <div className="error-message">
+                  <span className="error-icon">⚠️</span>
+                  {errors.fullDescription}
+                </div>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="image-upload" className="form-label">
+                <span className="label-icon">📷</span>
+                Mission Photo (Optional)
+              </label>
+              <div className="file-upload-container">
+                <input
+                  type="file"
+                  id="image-upload"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="file-input"
+                />
+                <label htmlFor="image-upload" className="file-upload-label">
+                  <div className="upload-icon">📤</div>
+                  <span className="upload-text">
+                    {formData.image ? formData.image.name : "Click to upload mission photo"}
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div className="form-submit">
+              <button type="submit" disabled={isSubmitting} className={`submit-button ${isSubmitting ? "loading" : ""}`}>
+                {isSubmitting ? (
+                  <>
+                    <div className="loading-spinner"></div>
+                    Logging Mission...
+                  </>
+                ) : (
+                  <>
+                    <span className="button-icon">✅</span>
+                    Log Mission
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
-      {/* Success Modal */}
       {showSuccessModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="success-modal" onClick={(e) => e.stopPropagation()}>

@@ -33,7 +33,7 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
         alt="Background Logo"
         className="absolute left-1/2 top-1/2 w-[400px] opacity-60 -translate-x-1/2 -translate-y-1/2 z-10"
       /> */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] z-10 opacity-60">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[430px] z-10 opacity-80">
         <motion.img
           src="/images/BackgroundLogo.png"
           alt="Background Logo"

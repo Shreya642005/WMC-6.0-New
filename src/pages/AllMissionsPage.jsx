@@ -106,8 +106,16 @@ export default function AllMissionsPage() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-red-900/20 flex items-center justify-center">
-        <div className="text-center">
+      // <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-red-900/20 flex items-center justify-center">
+      //   <div className="text-center">
+      <div className="min-h-screen bg-[#151414] flex items-center justify-center">
+        {/* Background elements for loading state */}
+        <img
+          src="/images/BackgroundLogo.png"
+          alt="Background Logo"
+          className="fixed left-1/2 top-1/2 w-[500px] opacity-70 -translate-x-1/2 -translate-y-1/2 z-0"
+        />
+        <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-white">Loading mission data...</p>
         </div>
@@ -116,10 +124,28 @@ export default function AllMissionsPage() {
   }
 
   return (
-    <div className="all-missions-page min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-red-900/20">
-      <div className="fixed inset-0 opacity-5">
-        <div className="spider-web-bg absolute inset-0"></div>
-      </div>
+    // <div className="all-missions-page min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-red-900/20">
+    //   <div className="fixed inset-0 opacity-5">
+    //     <div className="spider-web-bg absolute inset-0"></div>
+    //   </div>
+
+    <div className="all-missions-page min-h-screen bg-[#151414] relative">
+      {/* Spider-Man Background Elements */}
+      <img
+        src="/images/BackgroundLogo.png"
+        alt="Background Logo"
+        className="fixed left-1/2 top-1/2 w-[500px] opacity-70 -translate-x-1/2 -translate-y-1/2 z-0"
+      />
+      <img
+        src="/images/web2.png"
+        className="fixed top-0 left-0 w-[250px] opacity-20 z-0"
+        alt="web-top-left"
+      />
+      <img
+        src="/images/web1.png"
+        className="fixed top-0 right-0 w-[180px] opacity-15 z-0 pointer-events-none"
+        alt="web-top-right"
+      />
 
       <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="text-center mb-8">
