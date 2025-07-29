@@ -47,6 +47,8 @@ const MissionFormPage = () => {
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+
+    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
@@ -59,14 +61,21 @@ const MissionFormPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!validateForm()) return
+
+    if (!validateForm()) {
+      return
+    }
 
     setIsSubmitting(true)
 
+    // Simulate API call
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      // Show success modal
       setShowSuccessModal(true)
 
+      // Reset form after 3 seconds
       setTimeout(() => {
         setShowSuccessModal(false)
         setFormData({
@@ -78,6 +87,7 @@ const MissionFormPage = () => {
           fullDescription: "",
           image: null,
         })
+        // Reset file input
         const fileInput = document.getElementById("image-upload")
         if (fileInput) fileInput.value = ""
       }, 3000)
@@ -93,11 +103,12 @@ const MissionFormPage = () => {
   }
 
   return (
-    <div className="mission-form-container bg-[#151414] min-h-screen pt-24 relative">
+    <div className="mission-form-container bg-[#151414] min-h-screen pt-24 relative"> {/* Updated background and added relative positioning */}
+      {/* Spider-Man Background Elements */}
       <img
         src="/images/BackgroundLogo.png"
         alt="Background Logo"
-        className="fixed left-1/2 top-1/2 w-[500px] opacity-95 -translate-x-1/2 -translate-y-1/2 z-0"
+        className="fixed left-1/2 top-1/2 w-[400px] opacity-15 -translate-x-1/2 -translate-y-1/2 z-0"
       />
       <img
         src="/images/web2.png"
@@ -110,6 +121,7 @@ const MissionFormPage = () => {
         alt="web-top-right"
       />
 
+      {/* Header */}
       <div className="form-header relative z-10">
         <div className="header-icon">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -122,7 +134,9 @@ const MissionFormPage = () => {
         </div>
       </div>
 
+      {/* Main Form */}
       <div className="form-wrapper relative z-10">
+        {/* Form Card */}
         <div className="form-card">
           <div className="card-header">
             <div className="card-icon">M</div>
@@ -130,6 +144,7 @@ const MissionFormPage = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="mission-form">
+            {/* Mission Title */}
             <div className="form-group">
               <label htmlFor="missionTitle" className="form-label">
                 <span className="label-icon">📝</span>
@@ -151,6 +166,7 @@ const MissionFormPage = () => {
               )}
             </div>
 
+            {/* Short Description */}
             <div className="form-group">
               <label htmlFor="shortDescription" className="form-label">
                 <span className="label-icon">📄</span>
@@ -172,6 +188,7 @@ const MissionFormPage = () => {
               )}
             </div>
 
+            {/* Date and Time Row */}
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="date" className="form-label">
@@ -208,6 +225,7 @@ const MissionFormPage = () => {
               </div>
             </div>
 
+            {/* Place */}
             <div className="form-group">
               <label htmlFor="place" className="form-label">
                 <span className="label-icon">📍</span>
@@ -229,6 +247,7 @@ const MissionFormPage = () => {
               )}
             </div>
 
+            {/* Full Description */}
             <div className="form-group">
               <label htmlFor="fullDescription" className="form-label">
                 <span className="label-icon">📋</span>
@@ -250,6 +269,7 @@ const MissionFormPage = () => {
               )}
             </div>
 
+            {/* Image Upload */}
             <div className="form-group">
               <label htmlFor="image-upload" className="form-label">
                 <span className="label-icon">📷</span>
@@ -272,6 +292,7 @@ const MissionFormPage = () => {
               </div>
             </div>
 
+            {/* Submit Button */}
             <div className="form-submit">
               <button type="submit" disabled={isSubmitting} className={`submit-button ${isSubmitting ? "loading" : ""}`}>
                 {isSubmitting ? (
@@ -291,6 +312,7 @@ const MissionFormPage = () => {
         </div>
       </div>
 
+      {/* Success Modal */}
       {showSuccessModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="success-modal" onClick={(e) => e.stopPropagation()}>

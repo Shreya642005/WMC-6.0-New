@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-Global background for consistent Spider-Man theme across all pages
+/* Global background for consistent Spider-Man theme across all pages */
 body {
   background-color: #151414;
   background-image: 
@@ -19,7 +19,8 @@ body {
 #root {
   min-height: 100vh;
   background: inherit;
-}   
+}
+
 /* Common background elements for all pages */
 .spider-background {
   position: fixed;
@@ -55,4 +56,17 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.2;
+}
+
+/* Stable positioning for background logo to prevent layout shifts */
+.background-logo-stable {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 400px !important;
+  opacity: 0.6 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  will-change: auto !important;
 }

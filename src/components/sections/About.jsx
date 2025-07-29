@@ -3,10 +3,10 @@ import { MapPin, Clock } from 'lucide-react';
 
 const About = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-900/90 backdrop-blur-sm">
-      <div className="container mx-auto px-6 py-20">
+    <section className="min-h-screen flex items-center justify-center relative">
+      <div className="container mx-auto px-6 py-20 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-red-500 mb-8 font-['Anton'] tracking-wide">
+          <h2 className="text-4xl font-bold text-[#a62121] mb-8 font-['Anton'] tracking-wide">
             ABOUT THE DIARIES
           </h2>
           
@@ -32,7 +32,7 @@ const About = () => {
             
             {/* Right Column */}
             <div>
-              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+              <div className="bg-black/30 border border-gray-700 rounded-xl p-6 backdrop-blur-sm">
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <MapPin className="text-red-400" /> CURRENT LOCATION
                 </h3>
