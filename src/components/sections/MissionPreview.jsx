@@ -25,20 +25,20 @@ const MissionPreview = () => {
 
   return (
     <section className="min-h-screen py-20 bg-[#151414] relative">
-      {/* Spider-Man Background Elements - even lighter for this section */}
+      {/* Spider-Man Background Elements - same as other pages */}
       <img
         src="/images/BackgroundLogo.png"
         alt="Background Logo"
-        className="absolute left-1/2 top-1/2 w-[350px] opacity-8 -translate-x-1/2 -translate-y-1/2 z-0"
+        className="absolute left-1/2 top-1/2 w-[400px] opacity-20 -translate-x-1/2 -translate-y-1/2 z-0"
       />
       <img
         src="/images/web2.png"
-        className="absolute top-0 left-0 w-[200px] opacity-5 z-0"
+        className="absolute top-0 left-0 w-[250px] opacity-20 z-0"
         alt="web-top-left"
       />
       <img
         src="/images/web1.png"
-        className="absolute top-0 right-0 w-[150px] opacity-5 z-0 pointer-events-none"
+        className="absolute top-0 right-0 w-[180px] opacity-15 z-0 pointer-events-none"
         alt="web-top-right"
       />
       
