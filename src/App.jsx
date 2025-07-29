@@ -9,8 +9,10 @@ function App() {
   return (
     <Router>
       <div className="bg-[#151414] text-white min-h-screen">
+        <div className="spider-background"></div>
         <Navbar />
-        <main className="pt-16"> {/* Add padding to account for fixed navbar */}
+        {/* <main className="pt-16"> Add padding to account for fixed navbar */}
+        <main className="pt-20 relative z-10">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/missions" element={<AllMissionsPage />} />
