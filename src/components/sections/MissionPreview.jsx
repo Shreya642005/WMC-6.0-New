@@ -24,24 +24,7 @@ const MissionPreview = () => {
   ];
 
   return (
-    <section className="min-h-screen py-20 bg-[#151414] relative">
-      {/* Spider-Man Background Elements - same as other pages */}
-      <img
-        src="/images/BackgroundLogo.png"
-        alt="Background Logo"
-        className="absolute left-1/2 top-1/2 w-[400px] opacity-20 -translate-x-1/2 -translate-y-1/2 z-0"
-      />
-      <img
-        src="/images/web2.png"
-        className="absolute top-0 left-0 w-[250px] opacity-20 z-0"
-        alt="web-top-left"
-      />
-      <img
-        src="/images/web1.png"
-        className="absolute top-0 right-0 w-[180px] opacity-15 z-0 pointer-events-none"
-        alt="web-top-right"
-      />
-      
+    <section className="min-h-screen py-20 relative">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-12">
