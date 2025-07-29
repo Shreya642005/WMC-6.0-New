@@ -20,26 +20,7 @@ const Hero = ({ scrollToAbout, scrollToMissions }) => {
   const threadHeight = Math.min(128 + scrollY * 0.15, 220);
 
   return (
-    <section className="relative min-h-screen pt-28 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 bg-[#151414] text-white overflow-hidden">
-      {/* Fixed Background Elements for Entire Home Page */}
-      <motion.img
-        src="/images/BackgroundLogo.png"
-        alt="Background Logo"
-        className="fixed left-1/2 top-1/2 w-[400px] opacity-60 -translate-x-1/2 -translate-y-1/2 z-0"
-        animate={{ rotate: [0, 1, 0, -1, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <img
-        src="/images/web2.png"
-        className="fixed top-0 left-0 w-[300px] opacity-90 z-0"
-        alt="web-top-left"
-      />
-      <img
-        src="/images/web1.png"
-        className="fixed top-0 right-0 w-[200px] opacity-70 z-0 pointer-events-none"
-        alt="web-top-right"
-      />
-
+    <section className="relative min-h-screen pt-28 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 text-white overflow-hidden">
       {/* Text content */}
       <div className="z-10 text-left max-w-xl mt-10 md:mt-0 transform translate-y-[-2.5rem] translate-x-4 md:translate-y-[-3.5rem] md:translate-x-6">
         <motion.h1 
