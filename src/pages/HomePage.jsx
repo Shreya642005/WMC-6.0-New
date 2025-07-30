@@ -46,7 +46,10 @@ export default function HomePage() {
           <MissionPreview />
         </section>
 
-        <footer ref={footerRef} className="bg-black/95 text-gray-400 border-t border-gray-800">
+        <footer
+          ref={footerRef}
+          className="bg-black/30 text-gray-400 border-t border-gray-800 backdrop-blur-sm"
+        >
           <div className="container mx-auto px-6 py-12 max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 lg:gap-12">
             {/* Logo */}
             <div className="space-y-4 text-center md:text-left">
@@ -94,6 +97,7 @@ export default function HomePage() {
             <p className="mt-1 text-gray-600">Data encrypted with Stark Industries security protocols.</p>
           </div>
         </footer>
+
       </div>
     </div>
   );

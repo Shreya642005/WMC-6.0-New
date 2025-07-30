@@ -127,7 +127,7 @@ export default function AllMissionsPage() {
       <img
         src="/images/BackgroundLogo.png"
         alt="Background Logo"
-        className="fixed left-1/2 top-1/2 w-[400px] opacity-20 -translate-x-1/2 -translate-y-1/2 z-0"
+        className="fixed left-1/2 top-1/2 w-[500px] opacity-70 -translate-x-1/2 -translate-y-1/2 z-0"
       />
       <img
         src="/images/web2.png"
