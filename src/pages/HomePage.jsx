@@ -95,7 +95,7 @@ export default function HomePage() {
           <div className="mt-14 pt-6 border-t border-gray-700 text-center text-xs text-gray-500">
             <p>© {new Date().getFullYear()} Spider-Verse Archives. All rights reserved.</p>
             <p className="mt-1 text-gray-600">Data encrypted with Stark Industries security protocols.</p>
-          </div>
+          </div>zx
         </footer>
 
       </div>
