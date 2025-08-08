@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/Button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select"
 import { Badge } from "@/components/ui/badge"
 import { Filter, RotateCcw, Map, Grid3X3 } from "lucide-react"
 
