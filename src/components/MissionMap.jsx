@@ -64,6 +64,10 @@ export default function MissionMap({ missions, selectedMissionId, onMissionSelec
 
     // Add new markers
     missions.forEach((mission) => {
+      if (!Array.isArray(mission.coordinates) || mission.coordinates.length !== 2) {
+        return
+      }
+
       const urgencyColors = {
         low: "#10b981",
         medium: "#f59e0b",

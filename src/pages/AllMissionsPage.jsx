@@ -24,14 +24,17 @@ export default function AllMissionsPage() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    try {
-      const loadedMissions = getMissions()
-      setMissions(loadedMissions)
-      setIsLoaded(true)
-    } catch (error) {
-      console.error("Failed to load missions:", error)
-      setIsLoaded(true)
+    const load = async () => {
+      try {
+        const loadedMissions = await getMissions()
+        setMissions(loadedMissions)
+      } catch (error) {
+        console.error("Failed to load missions:", error)
+      } finally {
+        setIsLoaded(true)
+      }
     }
+    load()
   }, [])
 
   const filteredMissions = useMemo(() => {
@@ -55,7 +58,7 @@ export default function AllMissionsPage() {
           comparison = urgencyOrder[a.urgency] - urgencyOrder[b.urgency]
           break
         case "area":
-          comparison = a.area.localeCompare(b.area)
+          comparison = a.area?.localeCompare?.(b.area || '')
           break
         default:
           comparison = 0
@@ -69,25 +72,25 @@ export default function AllMissionsPage() {
   const activeMissionsCount = missions.filter((m) => m.status === "active").length
 
   const handleMissionSelect = (mission) => {
-    setSelectedMissionId(mission.id)
+    setSelectedMissionId(mission._id || mission.id)
     if (viewMode === "map") {
       setViewMode("cards")
     }
     setTimeout(() => {
-      const element = document.getElementById(`mission-${mission.id}`)
+      const element = document.getElementById(`mission-${mission._id || mission.id}`)
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "center" })
       }
     }, 100)
   }
 
-  const addDemoMission = () => {
+  const addDemoMission = async () => {
+    const now = new Date()
     const demoMission = {
-      id: Date.now().toString(),
       title: "Rhino Rampage Downtown",
       description: "The Rhino is causing massive property damage in the financial district. Multiple vehicles overturned.",
-      date: new Date().toISOString().split("T")[0],
-      time: new Date().toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit" }),
+      date: now.toISOString().split("T")[0],
+      time: now.toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit" }),
       location: "Wall Street",
       coordinates: [40.7074, -74.0113],
       urgency: "critical",
@@ -96,9 +99,9 @@ export default function AllMissionsPage() {
     }
 
     try {
-      const updatedMissions = addMission(demoMission)
-      setMissions(updatedMissions)
-      setNewMissionNotification(demoMission)
+      const created = await addMission(demoMission)
+      setMissions((prev) => [created, ...prev])
+      setNewMissionNotification(created)
     } catch (error) {
       console.error("Failed to add mission:", error)
     }
@@ -179,15 +182,15 @@ export default function AllMissionsPage() {
           <div className="missions-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredMissions.map((mission, index) => (
               <div
-                key={mission.id}
-                id={`mission-${mission.id}`}
+                key={mission._id || mission.id}
+                id={`mission-${mission._id || mission.id}`}
                 className="mission-card-wrapper"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <MissionCard
                   mission={mission}
-                  isHighlighted={mission.id === selectedMissionId}
-                  onClick={() => setSelectedMissionId(mission.id)}
+                  isHighlighted={mission._id === selectedMissionId || mission.id === selectedMissionId}
+                  onClick={() => setSelectedMissionId(mission._id || mission.id)}
                 />
               </div>
             ))}

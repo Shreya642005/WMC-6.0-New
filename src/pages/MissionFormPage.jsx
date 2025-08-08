@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import "../styles/missionForm.css"
+import { addMission } from "@/lib/missions"
 
 const MissionFormPage = () => {
   const [formData, setFormData] = useState({
@@ -68,9 +69,22 @@ const MissionFormPage = () => {
 
     setIsSubmitting(true)
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // Map form fields to API schema
+      const payload = {
+        title: formData.missionTitle,
+        description: formData.fullDescription || formData.shortDescription,
+        date: formData.date,
+        time: formData.time,
+        location: formData.place,
+        coordinates: undefined,
+        urgency: "medium",
+        status: "active",
+        area: "Manhattan",
+        imageUrl: undefined,
+      }
+
+      await addMission(payload)
 
       // Show success modal
       setShowSuccessModal(true)
@@ -87,12 +101,12 @@ const MissionFormPage = () => {
           fullDescription: "",
           image: null,
         })
-        // Reset file input
         const fileInput = document.getElementById("image-upload")
         if (fileInput) fileInput.value = ""
-      }, 3000)
+      }, 1500)
     } catch (error) {
       console.error("Error submitting mission:", error)
+      alert("Failed to submit mission. Check console for details.")
     } finally {
       setIsSubmitting(false)
     }
